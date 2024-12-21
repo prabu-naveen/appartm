@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://${DB_SERVER:localhost}:1433;databaseName=${DB_NAME};encrypt=true;trustServerCertificate=true
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+    show-sql: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+security:
+  jwt:
+    secret: ${JWT_SECRET:your-secret-key}
+    expiration: 86400000 # 24 hours
+
+cors:
+  allowed-origins: ${CORS_ORIGINS:http://localhost:5173}
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: Authorization,Content-Type
+  allow-credentials: true
